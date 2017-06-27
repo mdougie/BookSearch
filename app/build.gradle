@@ -24,5 +24,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'org.parceler:parceler-api:1.1.8'
+    annotationProcessor 'org.parceler:parceler:1.1.8'
     compile 'com.github.bumptech.glide:glide:3.8.0'
 }

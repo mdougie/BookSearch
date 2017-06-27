@@ -1,5 +1,7 @@
 package com.codepath.android.booksearch.models;
 
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.text.TextUtils;
 
 import org.json.JSONArray;
@@ -7,11 +9,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-public class Book {
-    private String openLibraryId;
-    private String author;
-    private String title;
+public class Book implements Parcelable{
+    String openLibraryId;
+    String author;
+    String title;
 
     public String getOpenLibraryId() {
         return openLibraryId;
@@ -29,6 +30,8 @@ public class Book {
     public String getCoverUrl() {
         return "http://covers.openlibrary.org/b/olid/" + openLibraryId + "-L.jpg?default=false";
     }
+
+    public Book(){}
 
     // Returns a Book given the expected JSON
     public static Book fromJson(JSONObject jsonObject) {
@@ -87,4 +90,34 @@ public class Book {
         }
         return books;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.openLibraryId);
+        dest.writeString(this.author);
+        dest.writeString(this.title);
+    }
+
+    protected Book(Parcel in) {
+        this.openLibraryId = in.readString();
+        this.author = in.readString();
+        this.title = in.readString();
+    }
+
+    public static final Creator<Book> CREATOR = new Creator<Book>() {
+        @Override
+        public Book createFromParcel(Parcel source) {
+            return new Book(source);
+        }
+
+        @Override
+        public Book[] newArray(int size) {
+            return new Book[size];
+        }
+    };
 }

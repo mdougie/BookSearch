@@ -1,5 +1,6 @@
 package com.codepath.android.booksearch.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -113,6 +114,13 @@ public class BookListActivity extends AppCompatActivity {
                 super.onFailure(statusCode, headers, responseString, throwable);
             }
         });
+    }
+
+    // ActivityOne.java
+    public void launchDetailView() {
+        // first parameter is the context, second is the class of the activity to launch
+        Intent i = new Intent(BookListActivity.this, BookDetailActivity.class);
+        startActivity(i); // brings up the second activity
     }
 
     @Override
